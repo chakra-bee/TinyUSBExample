@@ -49,6 +49,7 @@
 //--------------------------------------------------------------------
 
 // defined by board.mk
+#define CFG_TUSB_MCU OPT_MCU_STM32U5
 #ifndef CFG_TUSB_MCU
 #error CFG_TUSB_MCU must be defined
 #endif
