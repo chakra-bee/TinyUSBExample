@@ -6,4 +6,4 @@ target_sources(usb INTERFACE
 
 target_include_directories(usb INTERFACE
                             ${CMAKE_CURRENT_SOURCE_DIR}
-                           ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/tinyusb/hw/bsp )
+                            )

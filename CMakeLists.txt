@@ -50,11 +50,17 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+        ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/tinyusb/src/portable/st/stm32_fsdev/dcd_stm32_fsdev.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/tinyusb/src/portable/synopsys/dwc2/dcd_dwc2.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/tinyusb/src/portable/synopsys/dwc2/hcd_dwc2.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/tinyusb/src/portable/synopsys/dwc2/dwc2_common.c
+        #${CMAKE_CURRENT_SOURCE_DIR}/Drivers/tinyusb/src/portable/st/typec/typec_stm32.c
 )
 
 # Add include paths
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
-    # Add user defined include paths
+add_library(board_api INTERFACE)
+target_include_directories(board_api INTERFACE
+        ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/tinyusb/hw/bsp
 )
 
 # Add project symbols (macros)
@@ -66,8 +72,10 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 #list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)hub.com/hathach/tinyusb/tree/master#
 
 # Add linked libraries
+target_link_libraries(usb INTERFACE board_api)
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
     usb
+        board_api
     # Add user defined libraries
 )
